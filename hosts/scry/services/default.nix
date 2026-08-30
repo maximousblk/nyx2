@@ -1,6 +1,7 @@
 { modx, ... }: {
   imports = [
     modx.nixos.opentelemetry-agent
+    ./crafty.nix
     ./load.nix
     ./flaresolverr.nix
     ./tsidp.nix
