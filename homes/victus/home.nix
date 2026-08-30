@@ -189,6 +189,29 @@
     '';
   };
 
+  programs.atuin = {
+    enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+    flags = [
+      "--disable-up-arrow"
+      "--disable-ai"
+    ];
+    forceOverwriteSettings = true;
+    daemon.enable = true;
+    settings = {
+      auto_sync = false;
+      update_check = false;
+      style = "compact";
+      inline_height = 12;
+      show_help = false;
+      show_preview = false;
+      ai = {
+        enabled = false;
+      };
+    };
+  };
+
   programs.zoxide = {
     enable = true;
     options = [ "--cmd cd" ];
