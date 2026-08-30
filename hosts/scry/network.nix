@@ -7,11 +7,6 @@
   networking.firewall = {
     enable = true;
     allowPing = true;
-    allowedTCPPorts = [
-      22
-      80
-      443
-    ];
   };
 
   systemd.network.networks."10-enp0s6" = {
