@@ -36,12 +36,13 @@ module "scry" {
   instance_flex_ocpus         = local.scry_ocpus
   instance_flex_memory_in_gbs = local.scry_memory_in_gbs
   source_ocid                 = local.scry_bootstrap_image_id
-  source_type                 = "image"
+  source_type                 = "bootVolume"
   ssh_public_keys             = var.ssh_authorized_keys
   hostname_label              = local.scry_name
   public_ip                   = "EPHEMERAL"
   subnet_ocids                = [oci_core_subnet.celest_main.id]
   primary_vnic_nsg_ids        = [oci_core_network_security_group.scry.id]
   boot_volume_size_in_gbs     = local.scry_boot_volume_gbs
+  preserve_boot_volume        = true
   block_storage_sizes_in_gbs  = []
 }

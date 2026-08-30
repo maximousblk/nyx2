@@ -27,21 +27,16 @@ resource "oci_core_network_security_group" "scry" {
   freeform_tags  = merge(local.common_tags, { host = local.scry_name })
 }
 
-resource "oci_core_network_security_group_security_rule" "scry_ingress_tcp_v6" {
-  for_each = toset([for port in local.scry_tcp_ports : tostring(port)])
-
+resource "oci_core_network_security_group_security_rule" "scry_ingress_icmpv4_echo" {
   network_security_group_id = oci_core_network_security_group.scry.id
   direction                 = "INGRESS"
-  protocol                  = "6"
-  source                    = "::/0"
+  protocol                  = "1"
+  source                    = "0.0.0.0/0"
   source_type               = "CIDR_BLOCK"
-  description               = "Allow TCP ${each.value} to ${local.scry_name}."
+  description               = "ping4"
 
-  tcp_options {
-    destination_port_range {
-      min = tonumber(each.value)
-      max = tonumber(each.value)
-    }
+  icmp_options {
+    type = 8
   }
 }
 
