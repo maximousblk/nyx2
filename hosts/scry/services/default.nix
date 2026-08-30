@@ -2,7 +2,7 @@
   imports = [
     modx.nixos.opentelemetry-agent
     ./crafty.nix
-    ./load.nix
+    # ./load.nix
     ./flaresolverr.nix
     ./tsidp.nix
     ./signoz.nix
