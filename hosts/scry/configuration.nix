@@ -20,7 +20,10 @@
   documentation.nixos.enable = false;
 
   users.users = {
-    root.openssh.authorizedKeys.keyFiles = [ inputs.ssh-keys-maximousblk ];
+    root.openssh.authorizedKeys.keyFiles = [
+      inputs.ssh-keys-maximousblk
+      (inputs.self + "/hosts/cairn/zerobyte.pub")
+    ];
 
     maximousblk = {
       isNormalUser = true;

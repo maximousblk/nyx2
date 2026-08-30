@@ -51,6 +51,7 @@ let
           inherit organizationId;
           name = "Victus Home";
           backend = "sftp";
+          autoRemount = true;
           config = {
             backend = "sftp";
             host = "victus.pony-clownfish.ts.net";
@@ -66,11 +67,44 @@ let
           inherit organizationId;
           name = "Pyre Root";
           backend = "sftp";
+          autoRemount = true;
           config = {
             backend = "sftp";
             host = "pyre.pony-clownfish.ts.net";
             port = 22;
             username = "root";
+            privateKey = "file://zerobyte_sftp_ssh_private_key";
+            path = "/";
+            skipHostKeyCheck = true;
+          };
+        }
+        {
+          id = "scry-root-volume";
+          inherit organizationId;
+          name = "Scry Root";
+          backend = "sftp";
+          autoRemount = true;
+          config = {
+            backend = "sftp";
+            host = "scry.pony-clownfish.ts.net";
+            port = 22;
+            username = "root";
+            privateKey = "file://zerobyte_sftp_ssh_private_key";
+            path = "/";
+            skipHostKeyCheck = true;
+          };
+        }
+        {
+          id = "railway-vaultwarden-volume";
+          inherit organizationId;
+          name = "Railway Vaultwarden";
+          backend = "sftp";
+          autoRemount = true;
+          config = {
+            backend = "sftp";
+            host = "ssh.railway.com";
+            port = 22;
+            username = "54c87411-22de-46c6-851e-6fc0e8461b10";
             privateKey = "file://zerobyte_sftp_ssh_private_key";
             path = "/";
             skipHostKeyCheck = true;
