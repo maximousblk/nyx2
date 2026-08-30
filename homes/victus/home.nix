@@ -2,6 +2,7 @@
   pkgs,
   pkgx,
   modx,
+  inputs,
   config,
   ...
 }:
@@ -48,6 +49,7 @@
   home.stateVersion = "25.05";
 
   home.packages = with pkgs; [
+    inputs.paseo.packages.${pkgs.stdenv.hostPlatform.system}.paseo
     pkgx.polycat
 
     adwaita-icon-theme

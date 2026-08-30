@@ -155,6 +155,8 @@
       inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
+    paseo.url = "github:getpaseo/paseo";
+
     ssh-keys-maximousblk = {
       url = "https://github.com/maximousblk.keys";
       flake = false;

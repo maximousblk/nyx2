@@ -809,6 +809,24 @@
         "type": "github"
       }
     },
+    "paseo": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5"
+      },
+      "locked": {
+        "lastModified": 1787954441,
+        "narHash": "sha256-VVhUF7Gy/fBnFb+iGQpbAxrWF30SyXK9lbexG7vaRfA=",
+        "owner": "getpaseo",
+        "repo": "paseo",
+        "rev": "463415ae846cbcfef0df691e413a1a73a9213757",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getpaseo",
+        "repo": "paseo",
+        "type": "github"
+      }
+    },
     "pinecone": {
       "inputs": {
         "libnbtplusplus": "libnbtplusplus",
@@ -893,6 +911,7 @@
         "noctalia": "noctalia",
         "noctalia-community-plugins": "noctalia-community-plugins",
         "nur": "nur",
+        "paseo": "paseo",
         "pinecone": "pinecone",
         "quadlet-nix": "quadlet-nix",
         "ssh-keys-maximousblk": "ssh-keys-maximousblk",

@@ -1,5 +1,18 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
+let
+  paseoUser = config.services.paseo.user;
+  paseoUserHome = config.users.users.${paseoUser}.home;
+  paseoHomeProfile = config.home-manager.users.${paseoUser}.home.profileDirectory;
+in
+{
   imports = [
+    inputs.paseo.nixosModules.default
     ./hardware
     ./nixos
     ./user.nix
@@ -46,6 +59,27 @@
     enable = false;
     trustedInterfaces = [ "tailscale0" ];
   };
+
+  services.paseo = {
+    enable = true;
+    user = "maximousblk";
+    group = "users";
+    listenAddress = "0.0.0.0";
+    hostnames = true;
+    relay.enable = false;
+  };
+
+  # Paseo's Home Manager PATH fix leaves NixOS wrappers after system binaries:
+  # https://github.com/getpaseo/paseo/pull/1040
+  systemd.services.paseo.environment.PATH = lib.mkOverride 40 (
+    lib.concatStringsSep ":" [
+      config.security.wrapperDir
+      "${paseoUserHome}/.nix-profile/bin"
+      "${paseoUserHome}/.local/state/nix/profile/bin"
+      "${paseoHomeProfile}/bin"
+      "${config.system.path}/bin"
+    ]
+  );
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
