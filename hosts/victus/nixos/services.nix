@@ -1,5 +1,7 @@
 { pkgs, ... }: {
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   services.blueman.enable = true;
   services.openssh.enable = true;
   services.printing.enable = false;
