@@ -1,4 +1,10 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+{
 
   home.file."wallpapers" = {
     enable = true;
@@ -11,8 +17,22 @@
     systemd.enable = true;
 
     settings = {
+      accessibility.ui_scale = 1.0;
+
+      plugins = {
+        enabled = [ ];
+        auto_update = "none";
+        source = [
+          {
+            name = "community";
+            kind = "path";
+            location = "${inputs.noctalia-community-plugins}";
+            enabled = true;
+          }
+        ];
+      };
+
       shell = {
-        ui_scale = 1.0;
         corner_radius_scale = 0.5;
         font_family = "IoskeleyMono Nerd Font";
         lang = "";
@@ -24,7 +44,6 @@
         launch_apps_as_systemd_services = true;
         app_icon_colorize = false;
         clipboard_enabled = false;
-        middle_click_opens_widget_settings = false;
         password_style = "default";
         polkit_agent = true;
         screen_time_enabled = true;
@@ -41,22 +60,27 @@
 
         screen_corners = {
           enabled = true;
-          size = 6;
+          size = 12;
         };
 
         panel = {
           transparency_mode = "glass";
           borders = true;
           shadow = false;
-          launcher_placement = "centered";
-          clipboard_placement = "centered";
+          launcher_placement = "floating";
+          launcher_position = "center";
+          clipboard_placement = "floating";
+          clipboard_position = "center";
           control_center_placement = "floating";
+          wallpaper_placement = "floating";
+          wallpaper_position = "center";
+          session_placement = "floating";
+          session_position = "center";
           open_near_click_control_center = true;
-          wallpaper_placement = "centered";
-          session_placement = "centered";
         };
 
         mpris.blacklist = [ ];
+        privacy.mic_filter_regex = "Studio Voice Source";
         screenshot = {
           save_to_file = false;
         };
@@ -64,14 +88,79 @@
       };
 
       lockscreen = {
+        enabled = true;
+        allow_empty_password = false;
         blurred_desktop = false;
         blur_intensity = 0.0;
+        fingerprint = false;
+        lock_before_suspend = true;
+        monitors = [ ];
         tint_intensity = 0.0;
         wallpaper = "";
       };
 
+      lockscreen_widgets = {
+        enabled = true;
+        schema_version = 2;
+        widget_order = [
+          "lockscreen-login-box@eDP-1"
+          "lockscreen-widget-0000000000000001"
+        ];
+        grid = {
+          cell_size = 8;
+          major_interval = 4;
+          visible = true;
+        };
+        widget = {
+          "lockscreen-login-box@eDP-1" = {
+            box_height = 196.0;
+            box_width = 720.0;
+            cx = 960.0;
+            cy = 894.0;
+            enabled = true;
+            output = "eDP-1";
+            placement_height = 1080.0;
+            placement_width = 1920.0;
+            rotation = 0.0;
+            type = "login_box";
+            settings = {
+              background_color = "surface_variant";
+              background_opacity = 0.88;
+              background_radius = 12.0;
+              center_password_text = false;
+              input_opacity = 1.0;
+              input_radius = 6.0;
+              layout = "regular";
+              show_caps_lock = true;
+              show_keyboard_layout = true;
+              show_login_button = true;
+              show_media = true;
+              show_session_buttons = true;
+              show_unlock_hint = true;
+              show_weather = true;
+            };
+          };
+          lockscreen-widget-0000000000000001 = {
+            box_height = 104.0;
+            box_width = 256.0;
+            cx = 960.0;
+            cy = 72.0;
+            enabled = true;
+            output = "eDP-1";
+            placement_height = 1080.0;
+            placement_width = 1920.0;
+            rotation = 0.0;
+            type = "clock";
+            settings = {
+              background = false;
+              shadow = true;
+            };
+          };
+        };
+      };
+
       audio = {
-        enable_overdrive = false;
+        enable_overdrive = true;
         enable_sounds = true;
         sound_volume = 1.0;
       };
@@ -80,7 +169,7 @@
         mode = "dark";
         source = "wallpaper";
         builtin = "Rosé Pine";
-        wallpaper_scheme = "m3-rainbow";
+        wallpaper_scheme = "m3-content";
         templates = {
           enable_builtin_templates = true;
           builtin_ids = [
@@ -88,8 +177,13 @@
             "ghostty"
             "niri"
           ];
-          enable_community_templates = false;
-          community_ids = [ ];
+          enable_community_templates = true;
+          community_ids = [
+            "prismlauncher"
+            "vicinae"
+            "fastfetch"
+            "herdr"
+          ];
         };
       };
 
@@ -101,7 +195,7 @@
       weather = {
         enabled = true;
         effects = true;
-        unit = "metric";
+        unit = "celsius";
       };
 
       idle = {
@@ -125,7 +219,7 @@
         enabled = true;
         fill_mode = "crop";
         fill_color = "#000000";
-        directory = "${config.home.homeDirectory}/Pictures/Wallpapers";
+        directory = "${config.home.homeDirectory}/Pictures/Wallpapers/.base";
         per_monitor_directories = false;
         transition = [ "disc" ];
         transition_duration = 4000;
@@ -152,6 +246,18 @@
       control_center = {
         sidebar = "compact";
         sidebar_section = "none";
+        width = 700;
+        hidden_tabs = [ ];
+        show_session_button = true;
+        show_shortcut_labels = true;
+        shortcuts = [
+          { type = "wifi"; }
+          { type = "bluetooth"; }
+          { type = "caffeine"; }
+          { type = "nightlight"; }
+          { type = "notification"; }
+          { type = "power_profile"; }
+        ];
       };
 
       desktop_widgets = {
@@ -179,19 +285,23 @@
         reserve_space = true;
         background_opacity = 0.9;
         border_width = 0.0;
+        border = "outline";
         shadow = false;
         margin_edge = 4;
         margin_ends = 4;
         padding = 4;
-        radius = 4;
+        radius = 6;
         thickness = 32;
         panel_overlap = 0;
         scale = 1.0;
         font_weight = 600;
         capsule = true;
+        capsule_fill = "surface_variant";
+        capsule_thickness = 0.76;
         capsule_opacity = 0.0;
         capsule_padding = 4.0;
         capsule_radius = 4;
+        actions.middle = "none";
         start = [
           "workspaces"
           "active_window"
@@ -200,6 +310,7 @@
         end = [
           "media"
           "tray"
+          "privacy"
           "volume"
           "network"
           "battery"
@@ -211,12 +322,12 @@
 
       widget = {
         workspaces = {
-          display = "none";
-          minimal = false;
+          show_labels = false;
           max_label_chars = 1;
           labels_only_when_occupied = false;
           hide_when_empty = false;
         };
+        privacy.hide_inactive = true;
         active_window = {
           display = "icon_and_text";
           max_length = 800.0;
@@ -235,7 +346,6 @@
           hidden = [ ];
         };
         volume = {
-          scroll_step = 5;
           show_label = false;
         };
         network.show_label = false;
@@ -259,10 +369,17 @@
       dock = {
         enabled = true;
         position = "bottom";
-        auto_hide = true;
+        layer = "top";
+        auto_hide = false;
+        smart_auto_hide = true;
         reserve_space = false;
-        background_opacity = 0.0;
-        margin_edge = 8;
+        background_opacity = 0.9;
+        border = "outline";
+        border_width = 0.0;
+        margin_edge = 4;
+        margin_ends = 4;
+        main_axis_padding = 4;
+        cross_axis_padding = 4;
         icon_size = 36;
         active_monitor_only = true;
         magnification = true;

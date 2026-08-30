@@ -748,6 +748,22 @@
         "type": "github"
       }
     },
+    "noctalia-community-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787833516,
+        "narHash": "sha256-vppBfEdBDFkfOHu7BCUcFPtqwM+PGRhFurkXTeBp1UI=",
+        "ref": "refs/heads/main",
+        "rev": "e2fc850e46cf97f14a01a29139292e82ed9395d4",
+        "revCount": 815,
+        "type": "git",
+        "url": "https://github.com/noctalia-dev/community-plugins.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/noctalia-dev/community-plugins.git"
+      }
+    },
     "numen": {
       "inputs": {
         "nixpkgs": [
@@ -875,6 +891,7 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
         "noctalia": "noctalia",
+        "noctalia-community-plugins": "noctalia-community-plugins",
         "nur": "nur",
         "pinecone": "pinecone",
         "quadlet-nix": "quadlet-nix",

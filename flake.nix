@@ -143,6 +143,11 @@
       url = "github:noctalia-dev/noctalia";
     };
 
+    noctalia-community-plugins = {
+      url = "git+https://github.com/noctalia-dev/community-plugins.git";
+      flake = false;
+    };
+
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
       inputs.systems.follows = "systems";
