@@ -1,9 +1,10 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     deploy-rs
     ghostty
     helix
     fastfetch
+    inputs.pinecone.packages.${pkgs.stdenv.hostPlatform.system}.prismlauncher
 
     rose-pine-cursor
 
