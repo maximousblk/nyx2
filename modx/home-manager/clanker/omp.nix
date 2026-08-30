@@ -11,7 +11,7 @@ let
   skillsDir = ./skills;
   herdrSkills = pkgs.runCommand "herdr-omp-skills" { } ''
     mkdir -p $out/herdr
-    cp ${pkgs.herdr.src}/SKILL.md $out/herdr/SKILL.md
+    cp ${pkgs.herdr.src}/skills/herdr/SKILL.md $out/herdr/SKILL.md
   '';
 in
 {
