@@ -24,6 +24,12 @@
 
   programs.dconf.enable = true;
 
+  environment.etc."udisks2/mount_options.conf".text = lib.generators.toINI { } {
+    defaults = {
+      ntfs_drivers = "ntfs";
+    };
+  };
+
   security.rtkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
 

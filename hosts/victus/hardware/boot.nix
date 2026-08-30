@@ -12,7 +12,7 @@
 
   boot.kernelParams = [ "intel_idle.max_cstate=4" ];
 
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "ntfs" ];
   boot.initrd.kernelModules = [ ];
   boot.initrd.availableKernelModules = [
     "nvme"
